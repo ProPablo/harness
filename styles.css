@@ -1,0 +1,31 @@
+* { 
+    margin:0; 
+    padding:0;
+    cursor: url('./hole.png'), auto;
+}
+
+html, body { width:100%; height:100%;}
+
+body {
+    background-color: rgb(14, 14, 44);
+}
+p {
+    color: #ffffff;
+}
+
+canvas { display:block; } 
+#canvas0 {
+    position: absolute;
+    left: 0; top: 0; z-index: 0;
+}
+
+#canvas1 {
+    position: absolute;
+    left: 0; top: 0; z-index: 1;
+}
+
+#cords {
+    position: absolute;
+    left:0;
+    bottom:0;
+}
