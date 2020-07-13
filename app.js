@@ -28,9 +28,11 @@ function resizeCanvas() {
   console.log("Window was resized");
 }; resizeCanvas();
 
-let canvasOffset = new Vector();
+let canvasVector = new Vector(canvas.width/2, canvas.height/2);
 let ship = new Ship();
 let hole = new BlackHole();
+
+
 // ship.acceleration.set(0.1, 0.1);
 // ship.velocity.set(10, 0);
 
@@ -42,7 +44,7 @@ function mouseMoved(e) {
 }
 
 function update() {
-  const holeAttract = hole.attract(ship);
+  const holeAttract = hole.attract(canvasVector, ship);
   console.log(holeAttract);
   ship.update(holeAttract.x, holeAttract.y);
   //ship.update();

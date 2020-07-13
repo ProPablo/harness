@@ -4,18 +4,18 @@ const gravConstant = 6.674e-11;
 export default class BlackHole {
     constructor() {
         this.pos = new Vector(0,0);
-        this.mass = 15e7; //(kgs)
+        this.mass = 15e12; //(kgs)
     }
     update = (x, y) => {
         console.log(x, y);
         this.pos.set(x, y);
     }
-    attract = (ship) => {
+    attract = (canvasVector, ship) => {
         //Force calc * unit vector
         //Position is based on where mouse is relative to viewport
-        console.log(this.pos)
+        console.log(this.pos);
         const Force = Vector.fromVector(this.pos);
-
+        Force.subtract(canvasVector);
         //Force.subtract(ship.pos);
         //The Force to be calculative relative to viewport origin (canvas/2)
         const distsqrd = Force.magnitude ** 2;
