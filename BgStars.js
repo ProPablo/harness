@@ -2,7 +2,7 @@ import Vector from './Vector.js';
 export default class BG {
     constructor(pos = new Vector(0, 0)) {
         this.pos = pos;
-        
+        Math.random()
     }
 
     update = () => {

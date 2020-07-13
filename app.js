@@ -1,5 +1,8 @@
 import Ship from './Ship.js';
 import Vector from './Vector.js';
+import { checkImage } from './helpers.js';
+//constants 
+const CamfollowPlayer = true;
 
 //Setup
 const canvas = document.getElementById('canvas0');
@@ -25,9 +28,10 @@ function resizeCanvas() {
 }; resizeCanvas();
 
 let mouseVect = new Vector();
-let ship = new Ship(new Vector(500, 500));
-ship.acceleration.set(0.1, 0.1);
-
+let canvasOffset = new Vector();
+let ship = new Ship();
+// ship.acceleration.set(0.1, 0.1);
+ship.velocity.set(10, 0);
 
 function mouseMoved(e) {
   const { clientX: x, clientY: y } = e; //Object destructuring
@@ -36,25 +40,46 @@ function mouseMoved(e) {
   document.getElementById("cords").innerHTML = coor;
 }
 
-function draw() {
- ctx.clearRect(0, 0, canvas.width, canvas.height);
+function update() {
 
-  ship.draw(ctx);
+  ship.update();
 }
 
-function update() {
-  ship.update();
+function draw() {
+  // ctx.save();
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.translate(-ship.pos.x + canvas.width / 2, -ship.pos.y + canvas.height / 2);
+  ship.draw(ctx);
+
+  ctx.fillStyle = "#000000";
+  ctx.beginPath();
+  ctx.arc(100, 100, 20 * 2, 0, 2 * Math.PI);
+  ctx.fill();
+  ctx.closePath();
+
+  // ctx.restore();
+
 }
 
 function gameloop() {
   update();
+  // ctx.save();
   draw();
   requestAnimationFrame(gameloop);
+  // ctx.restore();
 }
 
 
 window.addEventListener('resize', resizeCanvas, false);
 canvas.addEventListener('mousemove', mouseMoved, false);
 
-gameloop();
-
+const imgPromises = [];
+imgPromises.push(checkImage(ship.image));
+// ship.draw(ctx);
+Promise.all(imgPromises)
+  .then(() => {
+    console.log("Loaded all Images");
+    gameloop();
+  });

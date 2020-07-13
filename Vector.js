@@ -10,4 +10,8 @@ export default class Vector {
     set = (x, y) => {
         this.x = x; this.y = y;
     }
+
+    distance = (other) => {
+        return Math.sqrt((other.x - this.x) ** 2 + (other.y- this.y) ** 2);
+    }
 }
