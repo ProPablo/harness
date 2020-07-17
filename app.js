@@ -32,6 +32,7 @@ let canvasVector = new Vector(canvas.width/2, canvas.height/2);
 let ship = new Ship();
 let hole = new BlackHole();
 
+//create grid canvas
 
 // ship.acceleration.set(0.1, 0.1);
 // ship.velocity.set(10, 0);

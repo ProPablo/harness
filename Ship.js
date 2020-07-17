@@ -12,10 +12,12 @@ export default class Ship {
         this.mass = 1;
     }
 
-    update = (x_accel =0, y_accel=0) => {
-        this.acceleration.set(x_accel, y_accel);
+    // update = (x_accel =0, y_accel=0) => {
+        // this.acceleration.set(x_accel, y_accel);
+    update = () => {
         this.velocity.add(this.acceleration);
         this.pos.add(this.velocity);
+        this.acceleration.set(0,0);
     }
     draw = (ctx) => {
         // ctx.strokeStyle = "#ffffff";
